@@ -1,10 +1,13 @@
 using GameStore.API.DTOs;
 
+const string GetGameEndpointName = "GetGame";
+
 var builder = WebApplication.CreateBuilder(args);
+
 var app = builder.Build();
 
 
-List<GameDTO> games = [
+List<GameDto> games = [
    new (1,
    "Street fighter 2",
    "Fighting",
@@ -16,7 +19,7 @@ new (2,
    59.99M,
    new DateOnly(2004, 10, 15)),
 new (3,
-   "Astro bot",
+   "Astro bot", 
    "Plataformer",
    49.99M,
    new DateOnly(2025, 7, 15)),  
@@ -25,14 +28,15 @@ new (3,
 // GET /games
 app.MapGet("/games", () => games);
 
+
 // get /games/{id}
 app.MapGet("/games/{id}", (int id) => games.Find(game => game.Id == id))
-   .WithName("GetGame");
+   .WithName(GetGameEndpointName);
 
 // Post /games
 app.MapPost("/games", (CreateGameDto newGame) =>
 {
-   GameDTO game = new(
+   GameDto game = new(
       games.Count + 1,
       newGame.Name,
       newGame.Genre,
@@ -42,7 +46,7 @@ app.MapPost("/games", (CreateGameDto newGame) =>
 
    games.Add(game);
 
-   return Results.CreatedAtRoute("GetGame", new {id = game.Id});
+   return Results.CreatedAtRoute(GetGameEndpointName, new {id = game.Id}, game);
 });
 
 app.Run();
