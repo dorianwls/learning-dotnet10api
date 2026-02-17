@@ -1,4 +1,4 @@
-namespace GameStore.API.DTOs;
+namespace GameStore.API.Dtos;
 
 public record class CreateGameDto(
    string Name,

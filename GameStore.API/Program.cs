@@ -1,4 +1,5 @@
-using GameStore.API.DTOs;
+using GameStore.API.Dtos;
+
 
 const string GetGameEndpointName = "GetGame";
 
@@ -47,6 +48,30 @@ app.MapPost("/games", (CreateGameDto newGame) =>
    games.Add(game);
 
    return Results.CreatedAtRoute(GetGameEndpointName, new {id = game.Id}, game);
+});
+
+//PUT /games/{id}
+app.MapPut("/games/{id}", (int id, UpdateGameDto updatedGame) =>
+{
+   var index = games.FindIndex(game => game.Id == id);
+
+   games[index] = new GameDto(
+      id,
+      updatedGame.Name,
+      updatedGame.Genre,
+      updatedGame.Price,
+      updatedGame.ReleaseDate
+   );
+
+   return Results.Ok();
+});
+
+// DELETE /games/1
+app.MapDelete("/games/{id}", (int id) =>
+{
+   games.RemoveAll(game => game.Id == id);
+
+   return Results.NoContent();
 });
 
 app.Run();
