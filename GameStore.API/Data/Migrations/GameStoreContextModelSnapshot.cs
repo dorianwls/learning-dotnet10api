@@ -9,66 +9,66 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GameStore.API.Data.Migrations
 {
-    [DbContext(typeof(GameStoreContext))]
-    partial class GameStoreContextModelSnapshot : ModelSnapshot
-    {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
+   [DbContext(typeof(GameStoreContext))]
+   partial class GameStoreContextModelSnapshot : ModelSnapshot
+   {
+      protected override void BuildModel(ModelBuilder modelBuilder)
+      {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.3");
+         modelBuilder.HasAnnotation("ProductVersion", "10.0.3");
 
-            modelBuilder.Entity("GameStore.API.Models.Game", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+         modelBuilder.Entity("GameStore.API.Models.Game", b =>
+             {
+                b.Property<int>("Id")
+                       .ValueGeneratedOnAdd()
+                       .HasColumnType("INTEGER");
 
-                    b.Property<int>("GenreId")
-                        .HasColumnType("INTEGER");
+                b.Property<int>("GenreId")
+                       .HasColumnType("INTEGER");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<string>("Name")
+                       .IsRequired()
+                       .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("TEXT");
+                b.Property<decimal>("Price")
+                       .HasColumnType("TEXT");
 
-                    b.Property<DateOnly>("ReleaseDate")
-                        .HasColumnType("TEXT");
+                b.Property<DateOnly>("ReleaseDate")
+                       .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("GenreId");
+                b.HasIndex("GenreId");
 
-                    b.ToTable("Games");
-                });
+                b.ToTable("Games");
+             });
 
-            modelBuilder.Entity("GameStore.API.Models.Genre", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+         modelBuilder.Entity("GameStore.API.Models.Genre", b =>
+             {
+                b.Property<int>("Id")
+                       .ValueGeneratedOnAdd()
+                       .HasColumnType("INTEGER");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<string>("Name")
+                       .IsRequired()
+                       .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Genres");
-                });
+                b.ToTable("Genres");
+             });
 
-            modelBuilder.Entity("GameStore.API.Models.Game", b =>
-                {
-                    b.HasOne("GameStore.API.Models.Genre", "Genre")
-                        .WithMany()
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+         modelBuilder.Entity("GameStore.API.Models.Game", b =>
+             {
+                b.HasOne("GameStore.API.Models.Genre", "Genre")
+                       .WithMany()
+                       .HasForeignKey("GenreId")
+                       .OnDelete(DeleteBehavior.Cascade)
+                       .IsRequired();
 
-                    b.Navigation("Genre");
-                });
+                b.Navigation("Genre");
+             });
 #pragma warning restore 612, 618
-        }
-    }
+      }
+   }
 }

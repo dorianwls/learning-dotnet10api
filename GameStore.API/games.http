@@ -11,8 +11,8 @@ Content-Type: application/json
 
 {
     "name": "Super mario Bros",
-    "genre": "Platformer",
-    "price": -19.99,
+    "genreId": 3,
+    "price": 19.99,
     "releaseDate": "2023-10-20"
 }
 
